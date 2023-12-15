@@ -2,7 +2,8 @@
 
 ## Description
 
-GreenTech-backend is a Node.js server application designed to manage eco-friendly packaging solutions. It provides a set of RESTful API endpoints for user authentication and package management, leveraging technologies like Express, MongoDB, and JWT for secure and efficient operations.
+GreenTech-backend is a Node.js server application developed as part of a three-month internship at GreenTech, Germany in summer 2023. This application is designed to manage eco-friendly packaging solutions, focusing on sustainability and environmental friendliness. It offers a suite of RESTful API endpoints for robust user authentication and package management, utilizing technologies such as Express, MongoDB, and JWT to ensure secure and efficient operations.
+
 
 ## Getting Started
 
