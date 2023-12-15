@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const categoryDataSchema = new mongoose.Schema({
     subcategory: {
         type: String,
-        required: true,
+        required: true
     },
     preservationNeeds: {
         type: String,
@@ -77,7 +77,9 @@ const categoryDataSchema = new mongoose.Schema({
         type: Boolean,
         required: false,
     },
-});
+},
+    { timestamps: true }
+);
 
 const CategoryData = mongoose.model('CategoryData', categoryDataSchema);
 

@@ -1,27 +1,29 @@
 import mongoose from 'mongoose';
-
-const userTypeOptions = ['producer', 'customer']; // Options for the userType field
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
     companyName: {
         type: String,
-        required: true
+        required: [true, 'Company name is required']
     },
     country: {
         type: String,
-        required: true
+        required: [true, 'Country is required']
     },
-    adress: {
+    address: {
         type: String,
-        required: true
+        required: [true, 'Address is required']
     },
     email: {
         type: String,
-        required: true
+        required: [true, 'Email is required'],
+        unique: true,
+        lowercase: true,
+        match: [/.+\@.+\..+/, 'Please fill a valid email address']
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Password is required']
     },
     website: {
         type: String,
@@ -29,19 +31,24 @@ const userSchema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        required: true,
-        enum: userTypeOptions
+        required: [true, 'User type is required'],
+        enum: ['producer', 'customer']
     },
     isAdmin: {
         type: Boolean,
-        default: false,
+        default: false
     },
-    ConfirmationCode: {
-        type: Number,
-        required: false
-    },
-},
-    { timestamps: true }
-);
+    confirmationCode: {
+        type: Number
+    }
+}, { timestamps: true });
+
+// Hash the password before saving
+userSchema.pre('save', async function(next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 12);
+    }
+    next();
+});
 
 export default mongoose.model('User', userSchema);

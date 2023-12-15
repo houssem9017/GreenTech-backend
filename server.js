@@ -10,6 +10,15 @@ import morgan from 'morgan';
 const app = express();
 dotenv.config();
 
+if (!process.env.MONGO) {
+    console.error("MONGO environment variable not set.");
+    process.exit(1);
+}
+
+if (!process.env.PORT) {
+    console.error("PORT environment variable not set.");
+    process.exit(1);
+}
 
 app.use(cors());
 app.use(cookieParser());
@@ -27,10 +36,15 @@ db.once('open', () => {
     console.log('Connected to MongoDB');
 });
 
-// Include the routes
+// Including the routes
 app.use(morgan('dev'));
 app.use('/user', userRoutes);
 app.use('/package', packageRoutes);
+
+// Test url
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
 
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;

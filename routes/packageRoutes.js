@@ -9,6 +9,6 @@ router.post('/addcategorydata', addCategoryDataToPackage);
 router.get('/getpackagebyid/:packageId', getPackagebyId);
 router.get('/getpackagebycategory/:category', getPackagebyCategory);
 router.post('/getPackagebyfilters', getPackagebyFilters);
-router.post('/deletepackage', deletePackage);
+router.post('/deletepackage', verifyUser, deletePackage);
 
 export default router;

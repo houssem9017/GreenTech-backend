@@ -1,34 +1,20 @@
 import mongoose from 'mongoose';
 
-const merchandiseTypeOptions = [
-    'Food & Beverages',
-    'Electronics',
-    'Clothing & Apparel',
-    'Cosmetics & Personal Care',
-    'Home & D�cor',
-    'Toys & Games',
-    'Sports & Outdoor Equipment',
-    'Other'
-];
-
 const packageSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    name: {
-        type: String,
-        required: false
-    },
+    name: String,
     producer: {
         type: Boolean,
         default: false
     },
     category: {
         type: String,
-        enum: merchandiseTypeOptions,
-        required:true
+        required: true,
+        enum: ['Food & Beverages', 'Electronics', 'Clothing & Apparel', 'Cosmetics & Personal Care', 'Home & Décor', 'Toys & Games', 'Sports & Outdoor Equipment', 'Other']
     },
     estimatedSize: {
         type: String,

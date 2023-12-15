@@ -67,6 +67,14 @@ export const getPackagebyCategory = async (req, res, next) => {
     }
 };
 
+/*
+Inputs
+req: The request object containing the filters in the body property.
+Based on the filter type, update the criteria object and add the filter to the selectFields array.
+If the filter is 'otherSustainability', 'otherType', or 'otherPackagingType', check if the corresponding property exists in the request body and update the criteria object accordingly.
+Construct the final query using the $or operator and the filterCriteria array.
+Return the packages as the output.
+*/
 export const getPackagebyFilters = async (req, res, next) => {
     try {
         const filters = req.body.filters;
